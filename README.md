@@ -22,3 +22,6 @@ Alternatively you can create the directory Phergie/Plugin/ipc-plugins by hand an
             'webclient.address' => '127.0.0.1:8123',
             ...
         );
+
+After you've installed the plugins open `Phergie/Plugins/ipc-plugins/WebClient/` in your browser.  
+The Web chat can be accessed at `Phergie/Plugins/ipc-plugins/WebChat/`.
