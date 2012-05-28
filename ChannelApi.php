@@ -14,13 +14,6 @@ class Phergie_Plugin_ChannelApi extends Phergie_Plugin_Abstract
 	}
 
 	
-	public function ipcReload($instance)
-	{
-		$this->logStatus  = $instance->logStatus;
-		$this->logContent = $instance->logContent;
-	}
-
-	
 	public function ipcAlias()
 	{
 		return 'chan';
