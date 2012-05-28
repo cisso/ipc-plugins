@@ -49,6 +49,7 @@ class Phergie_Plugin_PluginApi extends Phergie_Plugin_Abstract
 				if(!isset($blacklist[$file]))
 					$plugins[$file] = $pluginHandler->hasPlugin($file);
 			}
+		ksort($plugins);
 			
 		return $plugins;
 	}
