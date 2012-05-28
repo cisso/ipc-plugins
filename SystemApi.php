@@ -18,9 +18,10 @@ class Phergie_Plugin_SystemApi extends Phergie_Plugin_Abstract
 		if(!$this->startTime)
 			$this->startTime = time();
 			
-		$info = $this->getPluginHandler()->getPluginInfo('SystemApi');
-		list( , , $baseDir) = explode('/', $info['dir'], 3);
-		
+		// The Db plugin invalidates absolute paths. Wonderful.
+		$info = $this->db = $this->getPluginHandler()->getPluginInfo('Db');
+		$baseDir = ltrim(str_replace(realpath($info['dir']), '', realpath(dirname(__FILE__))), DIRECTORY_SEPARATOR);
+			
 		$this->db = $this->getPluginHandler()->getPlugin('Db')->init($baseDir . '/SystemApi/', 'systemapi.db', 'systemapi.sqlite');
 		$this->getIpc()->addApi($this);
 	}
@@ -87,8 +88,15 @@ class Phergie_Plugin_SystemApi extends Phergie_Plugin_Abstract
 		return $result;
 	}
 	
-	public function apiGlobal($name = null)
+	public function apiGlobal($name = null, $arg = null)
 	{
+		if($name === 'constants')
+		{
+			$list = get_defined_constants(true);
+			if(!is_null($arg))
+				return isset($list[$arg]) ? $list[$arg] : array();
+			return $list;
+		}
 		if(in_array($name, array('server', 'get', 'post', 'files', 'cookie', 'session', 'request', 'env')))
 			$name = '_' . strtoupper($name);
 		if(!isset($GLOBALS[$name]))
