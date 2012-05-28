@@ -1,0 +1,4 @@
+CREATE TABLE memory_usage (
+	time INTEGER  NOT NULL PRIMARY KEY,
+	size INTEGER
+);
