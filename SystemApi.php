@@ -79,7 +79,6 @@ class Phergie_Plugin_SystemApi extends Phergie_Plugin_Abstract
 	{
 		if(empty($since))
 			return array_sum($this->ticks['times']) / count($this->ticks['times']);
-		$since = time() - 480;
 		$result = array();
 		foreach($this->ticks['times'] as $time => $ticks)
 			if($time >= $since)
